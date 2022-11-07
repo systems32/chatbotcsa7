@@ -5,7 +5,7 @@ import java.util.Scanner;
  * @author Laurie White
  * @version April 2012
  */
-public class MagpieRunner4
+public class tvChatBotRunner
 {
 
 	/**
@@ -13,15 +13,15 @@ public class MagpieRunner4
 	 */
 	public static void main(String[] args)
 	{
-		Magpie4 maggie = new Magpie4();
+		tvchatbot chat = new tvchatbot();
 		
-		String name = maggie.Greeting();
+		String name = chat.Greeting();
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
 		while (!statement.equals("Bye"))
 		{
-			System.out.println (maggie.getResponse(statement, name));
+			System.out.println (chat.getResponse(statement, name));
 			statement = in.nextLine();
 		}
 	}
