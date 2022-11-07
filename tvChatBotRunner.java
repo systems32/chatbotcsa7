@@ -13,7 +13,7 @@ public class tvChatBotRunner
 	 */
 	public static void main(String[] args)
 	{
-		tvchatbot chat = new tvchatbot();
+		tvChatBot chat = new tvChatBot();
 		
 		String name = chat.Greeting();
 		Scanner in = new Scanner (System.in);

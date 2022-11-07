@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @version April 2012
  *
  */
-public class tvchatbot
+public class tvChatBot
 {
 	/**
 	 * Get a default greeting 	
