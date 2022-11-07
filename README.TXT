@@ -9,4 +9,4 @@ PURPOSE OF PROJECT: CSA Chatbot Assignemnt 2
 VERSION or DATE: 11/07/2022
 HOW TO START THIS PROJECT:
 AUTHORS: Ryan Lin and Pranavi Gollanapalli
-USER INSTRUCTIONS:
+USER INSTRUCTIONS: Run using the MagpieRunner4.java file
