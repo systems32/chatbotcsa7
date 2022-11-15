@@ -15,7 +15,7 @@ public class tvChatBotRunner
 	{
 		tvchatbot chat = new tvchatbot();
 		
-		//String name = chat.Greeting();
+		String name = chat.Greeting();
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
@@ -23,7 +23,7 @@ public class tvChatBotRunner
 		while (!statement.equals("Bye"))
 		{
 			int num = chat.getState(statement);
-			System.out.println(chat.setState(num, statement));
+			System.out.println(chat.setState(num, statement, name));
 			statement = in.nextLine();
 		}
 	}

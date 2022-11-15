@@ -28,7 +28,6 @@ public class tvchatbot
 		for (int i = 0; i < keywords.length; i++) {
 
 			if (findKeyword(statement, keywords[i]) >= 0) {
-				System.out.println(keywords[i]);
 				nextState = i;
 			}
 		}
@@ -39,10 +38,9 @@ public class tvchatbot
 		return nextState; 
 	}
 	
-	public String setState(int currState, String statement){
+	public String setState(int currState, String statement, String name){
 		//reset all values.  Your state logic may vary
 		 String response = "";
-		 System.out.println(currState);
 		 switch(currState + 1) {
 		    case 1:
 		   		response = "Hello again " + name;
@@ -223,7 +221,6 @@ public class tvchatbot
 		double r = Math.random();
 		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
 		String response = "";
-		System.out.println(whichResponse + 1);
 		switch(whichResponse + 1) {
 			case 1:
 				response = "Interesting, tell me more.";
