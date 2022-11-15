@@ -15,13 +15,15 @@ public class tvChatBotRunner
 	{
 		tvchatbot chat = new tvchatbot();
 		
-		String name = chat.Greeting();
+		//String name = chat.Greeting();
 		Scanner in = new Scanner (System.in);
 		String statement = in.nextLine();
 		
+		
 		while (!statement.equals("Bye"))
 		{
-			System.out.println (chat.getResponse(statement, name));
+			int num = chat.getState(statement);
+			System.out.println(chat.setState(num, statement));
 			statement = in.nextLine();
 		}
 	}

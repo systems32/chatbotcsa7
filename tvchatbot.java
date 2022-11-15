@@ -18,8 +18,63 @@ public class tvchatbot
 	 * @return a greeting
 	 */	
 
-	 private String name = "";
+	private String name = "";
+	private Boolean state0, state1, state2, state3, state4, state5, state6, state7;
+   	int currState;
+	String[] keywords = {"hello", "hi", "tv", "television", "I want to", "yes", "no"};
 	
+	public int getState(String statement) {
+		int nextState = -1;
+		for (int i = 0; i < keywords.length; i++) {
+
+			if (findKeyword(statement, keywords[i]) >= 0) {
+				System.out.println(keywords[i]);
+				nextState = i;
+			}
+		}
+		int psn = findKeyword(statement, "you", 0);
+		if (psn >= 0 && findKeyword(statement, "me", psn) >= 0) {
+			nextState = 7;
+		}
+		return nextState; 
+	}
+	
+	public String setState(int currState, String statement){
+		//reset all values.  Your state logic may vary
+		 String response = "";
+		 System.out.println(currState);
+		 switch(currState + 1) {
+		    case 1:
+		   		response = "Hello again " + name;
+				break;
+			case 2:
+				response = "Hello again " + name;
+			 	break;
+			case 3:
+				response = TVShow(name);
+			 	break;
+		    case 4:
+				response = TVShow(name);
+			 	break;
+			case 5:
+				response = transformIWantToStatement(statement);
+			 	break;
+			case 6:
+				response = "Sounds good " + name + "!";
+				break;
+			case 7:
+				response = "Why are you so negative " + name + "?";
+				break;
+			case 8:
+				response = transformYouMeStatement(statement);
+				break;
+		    default:
+				response = getRandomResponse();
+		  }
+		  return response;
+	  }
+  
+
 	public String Greeting()
 	{
 		System.out.println("Hello my name is Joe, let's talk. What's your name? (To exit respond with Bye)");
@@ -39,68 +94,6 @@ public class tvchatbot
 		return name;
 	}
 	
-	/**
-	 * Gives a response to a user statement
-	 * 
-	 * @param statement
-	 *            the user statement
-	 * @return a response based on the rules given
-	 */
-	public String getResponse(String statement, String name)
-	{
-		String response = "";
-		if (statement.length() == 0)
-		{
-			response = name + " say something, please.";
-		}
-
-		else if (findKeyword(statement, "no") >= 0 || findKeyword(statement, "meh") >= 0)
-		{
-			response = "Why are you so negative " + name + "?";
-		}
-		else if (findKeyword(statement, "yes") >= 0)
-		{
-			response = "Sounds good " + name + "!";
-		}
-
-		else if (findKeyword(statement, "mother") >= 0
-				|| findKeyword(statement, "father") >= 0
-				|| findKeyword(statement, "sister") >= 0
-				|| findKeyword(statement, "brother") >= 0)
-		{
-			response =  "Very cool! Tell me more about your family.";
-		}
-
-		// Responses which require transformations
-		else if (findKeyword(statement, "I want to", 0) >= 0)
-		{
-			response = transformIWantToStatement(statement);
-		} 
-		else if (findKeyword(statement, "hi") >= 0 || findKeyword(statement, "hello") >= 0) {
-			response = "Hello again " + name;
-		}
-		else if (findKeyword(statement, "television") >= 0 || findKeyword(statement, "TV") >= 0) 
-		{
-			response = TVShow(name);
-		}
-		else
-		{
-			// Look for a two word (you <something> me)
-			// pattern
-			int psn = findKeyword(statement, "you", 0);
-
-			if (psn >= 0
-					&& findKeyword(statement, "me", psn) >= 0)
-			{
-				response = transformYouMeStatement(statement);
-			}
-			else
-			{
-				response = getRandomResponse();
-			}
-		}
-		return response;
-	}
 	
 	/**
 	 * Take a statement with "I want to <something>." and transform it into 
@@ -230,28 +223,24 @@ public class tvchatbot
 		double r = Math.random();
 		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
 		String response = "";
-		
-		if (whichResponse == 0)
-		{
-			response = "Interesting, tell me more.";
+		System.out.println(whichResponse + 1);
+		switch(whichResponse + 1) {
+			case 1:
+				response = "Interesting, tell me more.";
+				break;
+			case 2:
+				response = "Mhm";
+				break;
+			case 3:
+				response = "Do you really think so?";
+				break;
+			case 4:
+				response = "Huh? How about we talk about TV?";
+				break;
+			case 5:
+				response = "What do you mean? How about we talk about TV?";
+				break;
 		}
-		else if (whichResponse == 1)
-		{
-			response = "Mhm";
-		}
-		else if (whichResponse == 2)
-		{
-			response = "Do you really think so?";
-		}
-		else if (whichResponse == 3)
-		{
-			response = "Huh? How about we talk about TV?";
-		}
-		else if (whichResponse == 4)
-		{
-			response = "What do you mean? How about we talk about TV?";
-		}
-
 		return response;
 	}
 
@@ -284,5 +273,68 @@ public class tvchatbot
 		}
 		return " Nice talking about TV shows " + name + "!";
 	}
+
+	// /**
+	//  * Gives a response to a user statement
+	//  * 
+	//  * @param statement
+	//  *            the user statement
+	//  * @return a response based on the rules given
+	//  */
+	// public String getResponse(String statement, String name)
+	// {
+	// 	String response = "";
+	// 	if (statement.length() == 0)
+	// 	{
+	// 		response = name + " say something, please.";
+	// 	}
+
+	// 	else if (findKeyword(statement, "no") >= 0 || findKeyword(statement, "meh") >= 0)
+	// 	{
+	// 		response = "Why are you so negative " + name + "?";
+	// 	}
+	// 	else if (findKeyword(statement, "yes") >= 0)
+	// 	{
+	// 		response = "Sounds good " + name + "!";
+	// 	}
+
+	// 	else if (findKeyword(statement, "mother") >= 0
+	// 			|| findKeyword(statement, "father") >= 0
+	// 			|| findKeyword(statement, "sister") >= 0
+	// 			|| findKeyword(statement, "brother") >= 0)
+	// 	{
+	// 		response =  "Very cool! Tell me more about your family.";
+	// 	}
+
+	// 	// Responses which require transformations
+	// 	else if (findKeyword(statement, "I want to", 0) >= 0)
+	// 	{
+	// 		response = transformIWantToStatement(statement);
+	// 	} 
+	// 	else if (findKeyword(statement, "hi") >= 0 || findKeyword(statement, "hello") >= 0) {
+	// 		response = "Hello again " + name;
+	// 	}
+	// 	else if (findKeyword(statement, "television") >= 0 || findKeyword(statement, "TV") >= 0) 
+	// 	{
+	// 		response = TVShow(name);
+	// 	}
+	// 	else
+	// 	{
+	// 		// Look for a two word (you <something> me)
+	// 		// pattern
+	// 		int psn = findKeyword(statement, "you", 0);
+
+	// 		if (psn >= 0
+	// 				&& findKeyword(statement, "me", psn) >= 0)
+	// 		{
+	// 			response = transformYouMeStatement(statement);
+	// 		}
+	// 		else
+	// 		{
+	// 			response = getRandomResponse();
+	// 		}
+	// 	}
+	// 	return response;
+	// }
 
 }
